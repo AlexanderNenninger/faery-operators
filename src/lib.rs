@@ -1,16 +1,14 @@
 //! faery-operators explores abstract linear operators in faer
-use std::ops::{Deref, Mul};
 
 use faer::{
-    dbgf,
-    modules::core::{inner::DenseOwn, ComplexField, Conjugate, Matrix, RealField},
+    modules::core::{inner::DenseOwn, Matrix, RealField},
     scale, Mat,
 };
 
 mod faer_impls;
 
 /// Abstract Linear Operator that knows its size and can be applied to an element of the base space.
-pub trait LinearOperator<E: RealField + Conjugate>
+pub trait LinearOperator<E: RealField>
 where
     Self: Sized,
 {
@@ -50,6 +48,7 @@ where
         }
         let mut p = residual.clone();
         let mut niter = 0;
+
         while niter < maxiter {
             let rtr: E::Real = (residual.as_ref().transpose() * residual.as_ref()).read(0, 0);
             let denominator: E::Real = (p.as_ref().transpose() * self.apply(&p)).read(0, 0);
@@ -79,10 +78,8 @@ where
 
 #[cfg(test)]
 mod tests {
-    use faer::col;
+
     use faer::mat;
-    use faer::sparse::solvers::SpSolver;
-    use faer::FaerMat;
 
     use crate::SymmetricPositiveDefinite;
 

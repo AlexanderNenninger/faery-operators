@@ -1,6 +1,5 @@
 use super::*;
 use faer::modules::core::RealField;
-use faer_entity::Entity;
 
 impl<E: RealField> LinearOperator<E> for Matrix<DenseOwn<E>> {
     fn nrows(&self) -> usize {
