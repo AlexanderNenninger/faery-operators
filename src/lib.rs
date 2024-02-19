@@ -39,6 +39,7 @@ pub trait SymmetricPositiveDefinite<E: RealField>
 where
     Self: Symmetric<E> + PositiveDefinite<E>,
 {
+    /// https://en.wikipedia.org/wiki/Conjugate_gradient_method
     fn conjugate_gradient(self, rhs: Mat<E>, tol: E::Real, maxiter: usize) -> Matrix<DenseOwn<E>> {
         let mut x: Mat<E> = Mat::<E>::zeros(self.nrows(), 1);
         let mut residual = rhs - self.apply(&x);
