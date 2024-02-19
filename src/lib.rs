@@ -85,7 +85,7 @@ mod tests {
 
     #[test]
     fn it_does_not_work() {
-        let mat = mat!([1.0, 2.0], [-3., 1.]);
+        let mat = mat!([1.0, -3.0], [-3., 1.]);
         let b = mat!([1.0], [2.0]);
 
         let x = mat.clone().conjugate_gradient(b.clone(), 1e-10, 100);
